@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Resty.Data.Interfaces\Resty.Data.Interfaces.csproj" />
+    <ProjectReference Include="..\Resty.Data\Resty.Data.csproj" />
+  </ItemGroup>
+
+</Project>
