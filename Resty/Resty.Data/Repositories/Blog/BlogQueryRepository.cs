@@ -12,19 +12,19 @@ namespace Resty.Data.Repositories.Blog
     {
         public BlogQueryRepository(RestyDbContext context) : base(context) { }
 
-        public Task<IDataBlog[]> GetAllAsync()
-        {
-            return DbContext.Blogs
-                .Select(x => ToDataBlog(x))
-                .ToArrayAsync<IDataBlog>();
-        }
+        //public Task<IDataBlog[]> GetAllAsync()
+        //{
+        //    return DbContext.Blogs
+        //        .Select(x => ToDataBlog(x))
+        //        .ToArrayAsync<IDataBlog>();
+        //}
 
-        public Task<IDataBlog> GetByIdAsync(int id)
-        {
-            return DbContext.Blogs
-                .Select(x => ToDataBlog(x))
-                .FirstOrDefaultAsync<IDataBlog>(x => x.Id == id);
-        }
+        //public Task<IDataBlog> GetByIdAsync(int id)
+        //{
+        //    return DbContext.Blogs
+        //        .Select(x => ToDataBlog(x))
+        //        .FirstOrDefaultAsync<IDataBlog>(x => x.Id == id);
+        //}
 
 
 
@@ -44,13 +44,15 @@ namespace Resty.Data.Repositories.Blog
                 .AnyAsync(x => x.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
         }
 
-        private static IDataBlog ToDataBlog(Models.Blog.Blog blog)
+        private static IDataBlogPreview ToDataBlogPreview(Models.Blog.Blog blog)
         {
-            return new DataBlog()
+            return new DataBlogPreview()
             {
                 Id = blog.Id,
                 Title = blog.Title,
                 CreatedDateUtc = blog.CreatedDateUtc,
+                Type = blog.Type,
+
                 Author = new DataAuthor
                 {
                     Id = blog.Author.Id,

@@ -12,5 +12,13 @@ namespace Resty.Data.Interfaces.DTO.Blog
         IDataAuthor Author { get; }
 
         BlogTypes Type { get; }
+
+        int Rating { get; }
+
+        bool HasUserBookmark { get; }
+
+        int NumberOfViews { get; }
+
+        int NumberOfBookmarks { get; }
     }
 }

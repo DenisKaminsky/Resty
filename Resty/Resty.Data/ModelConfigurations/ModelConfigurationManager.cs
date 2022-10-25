@@ -15,6 +15,7 @@ namespace Resty.Data.ModelConfigurations
 
             #region Blog
             modelBuilder.ConfigureBlog();
+            modelBuilder.ConfigureTag();
             #endregion
 
             #region UserBlog (relations)

@@ -7,7 +7,7 @@ namespace Resty.Data.Models.Blog
     {
         public string Title { get; set; }
             
-        public string Description { get; set; }
+        public string Preview { get; set; }
 
         public DateTime CreatedDateUtc { get; set; }
 
@@ -24,5 +24,7 @@ namespace Resty.Data.Models.Blog
         public IEnumerable<BlogUserComment> UserComments { get; set; }
 
         public IEnumerable<BlogUserReview> UserReviews { get; set; }
+
+        public IEnumerable<Tag> Tags { get; set; }
     }
 }

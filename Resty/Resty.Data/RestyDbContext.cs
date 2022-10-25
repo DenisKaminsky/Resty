@@ -14,6 +14,7 @@ namespace Resty.Data
 
         #region Blog
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         #endregion
 
         #region UserBlog (relations)

@@ -4,7 +4,7 @@ using Resty.Core.Interfaces.Enums.Blog;
 
 namespace Resty.Data.ModelConfigurations.Blog
 {
-    internal static class BlogUserBookmarkConfiguration
+    internal static class BlogConfiguration
     {
         internal static void ConfigureBlog(this ModelBuilder modelBuilder)
         {
@@ -17,8 +17,8 @@ namespace Resty.Data.ModelConfigurations.Blog
                 .IsRequired();
 
             modelBuilder.Entity<Models.Blog.Blog>()
-                .Property(x => x.Description)
-                .HasMaxLength(BlogConstraints.DescriptionMaxLength)
+                .Property(x => x.Preview)
+                .HasMaxLength(BlogConstraints.PreviewMaxLength)
                 .IsRequired(false);
 
             modelBuilder.Entity<Models.Blog.Blog>()
@@ -37,6 +37,11 @@ namespace Resty.Data.ModelConfigurations.Blog
                 .WithMany(x => x.Blogs)
                 .HasForeignKey(x => x.AuthorId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Models.Blog.Blog>()
+                .HasMany(p => p.Tags)
+                .WithMany(p => p.Blogs)
+                .UsingEntity(j => j.ToTable("BlogTags"));
         }
     }
 }

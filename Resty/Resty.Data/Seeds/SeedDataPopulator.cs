@@ -14,6 +14,7 @@ namespace Resty.Data.Seeds
             #endregion
 
             #region Blogs
+            modelBuilder.SeedTags();
             modelBuilder.SeedBlogs();
             modelBuilder.SeedBlogUserBookmarks();
             modelBuilder.SeedBlogUserComments();

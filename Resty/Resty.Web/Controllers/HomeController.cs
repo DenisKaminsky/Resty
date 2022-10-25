@@ -8,17 +8,17 @@ namespace Resty.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IUserQueryRepository _userQueryRepository;
+        private readonly ITestRepository _testRepository;
 
-        public HomeController(ILogger<HomeController> logger, IUserQueryRepository userQueryRepository)
+        public HomeController(ILogger<HomeController> logger, ITestRepository testRepository)
         {
             _logger = logger;
-            _userQueryRepository = userQueryRepository;
+            _testRepository = testRepository;
         }
 
         public async Task<IActionResult> Index()
         {
-            var a = await _userQueryRepository.GetAllAsync();
+            var a = await _testRepository.GetAllAsync();
             return View();
         }
 

@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Resty.Core\Resty.Core.csproj" />
+    <ProjectReference Include="..\Resty.Core.Interfaces\Resty.Core.Interfaces.csproj" />
     <ProjectReference Include="..\Resty.Data.Interfaces\Resty.Data.Interfaces.csproj" />
   </ItemGroup>
 
