@@ -1,4 +1,4 @@
-﻿namespace Resty.Core.Constraints.User
+﻿namespace Resty.Core.Interfaces.Constraints.User
 {
     public static class UserConstraints
     {

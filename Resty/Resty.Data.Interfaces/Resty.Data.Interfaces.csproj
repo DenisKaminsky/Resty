@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\Resty.Core\Resty.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\Blog\" />
+    <Folder Include="Repositories\UserBlog\" />
   </ItemGroup>
 
 </Project>

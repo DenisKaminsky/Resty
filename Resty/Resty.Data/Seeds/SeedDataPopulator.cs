@@ -10,7 +10,6 @@ namespace Resty.Data.Seeds
         internal static void PopulateSeedData(this ModelBuilder modelBuilder)
         {
             #region User
-            modelBuilder.SeedUserRoles();
             modelBuilder.SeedUsers();
             #endregion
 

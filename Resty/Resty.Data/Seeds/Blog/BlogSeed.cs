@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Resty.Core.Interfaces.Enums.Blog;
 
 namespace Resty.Data.Seeds.Blog
 {
@@ -15,6 +16,7 @@ namespace Resty.Data.Seeds.Blog
                     Description = "Blog created by DenisAdmin",
                     Content = "TEST",
                     CreatedDateUtc = DateTime.UtcNow,
+                    Type = BlogTypes.Post,
                     AuthorId = 1
                 },
 
@@ -25,6 +27,7 @@ namespace Resty.Data.Seeds.Blog
                     Description = "Blog created by DenisGuest",
                     Content = "TEST 2",
                     CreatedDateUtc = DateTime.UtcNow.AddHours(-1),
+                    Type = BlogTypes.Post,
                     AuthorId = 2
                 },
 
@@ -34,7 +37,38 @@ namespace Resty.Data.Seeds.Blog
                     Title = "DenisPrime Blog",
                     Content = "TEST 3",
                     CreatedDateUtc = DateTime.UtcNow.AddHours(-2),
+                    Type = BlogTypes.Post,
                     AuthorId = 3
+                },
+
+                new Models.Blog.Blog
+                {
+                    Id = 4,
+                    Title = "DenisAdmin News 1",
+                    Content = "TEST NEWS 1",
+                    CreatedDateUtc = DateTime.UtcNow.AddHours(-2),
+                    Type = BlogTypes.News,
+                    AuthorId = 1
+                },
+
+                new Models.Blog.Blog
+                {
+                    Id = 5,
+                    Title = "DenisAdmin News 3",
+                    Content = "TEST NEWS 2",
+                    CreatedDateUtc = DateTime.UtcNow.AddHours(-3),
+                    Type = BlogTypes.News,
+                    AuthorId = 1
+                },
+
+                new Models.Blog.Blog
+                {
+                    Id = 6,
+                    Title = "DenisAdmin News 3",
+                    Content = "TEST NEWS 3",
+                    CreatedDateUtc = DateTime.UtcNow.AddHours(-4),
+                    Type = BlogTypes.News,
+                    AuthorId = 1
                 }
             };
 

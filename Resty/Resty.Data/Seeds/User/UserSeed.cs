@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Resty.Core.Enums;
+using Resty.Core.Interfaces.Enums.User;
 
 namespace Resty.Data.Seeds.User
 {
@@ -21,7 +21,7 @@ namespace Resty.Data.Seeds.User
                     PasswordHash = passwordHash,
                     StartDateUtc = DateTime.UtcNow.AddDays(-100),
                     Rating = 900,
-                    RoleId = (int)UserRoles.Admin
+                    Role = UserRoles.Admin
                 },
 
                 new Models.User.User
@@ -34,7 +34,7 @@ namespace Resty.Data.Seeds.User
                     PasswordHash = passwordHash,
                     StartDateUtc = DateTime.UtcNow.AddDays(-10),
                     Rating = 1,
-                    RoleId = (int)UserRoles.GuestUser
+                    Role = UserRoles.GuestUser
                 },
 
                 new Models.User.User
@@ -47,7 +47,7 @@ namespace Resty.Data.Seeds.User
                     PasswordHash = passwordHash,
                     StartDateUtc = DateTime.UtcNow.AddDays(-5),
                     Rating = 3,
-                    RoleId = (int)UserRoles.PrimeUser
+                    Role = UserRoles.PrimeUser
                 }
             };
 

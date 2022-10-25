@@ -10,7 +10,6 @@ namespace Resty.Data
     {
         #region User
         public DbSet<User> Users { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
         #endregion
 
         #region Blog

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Resty.Core.Constraints.User;
+using Resty.Core.Interfaces.Constraints.User;
+using Resty.Core.Interfaces.Enums.User;
 
 namespace Resty.Data.ModelConfigurations.User
 {
@@ -12,6 +13,10 @@ namespace Resty.Data.ModelConfigurations.User
 
             modelBuilder.Entity<Models.User.User>()
                 .HasIndex(x => x.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<Models.User.User>()
+                .HasIndex(x => x.Username)
                 .IsUnique();
 
             modelBuilder.Entity<Models.User.User>()
@@ -38,6 +43,13 @@ namespace Resty.Data.ModelConfigurations.User
                 .Property(x => x.PasswordHash)
                 .HasMaxLength(UserConstraints.PasswordHashLength)
                 .IsRequired();
+
+            modelBuilder.Entity<Models.User.User>()
+                .Property(x => x.Role)
+                .IsRequired()
+                .HasConversion(
+                    x => x.ToString(),
+                    x => (UserRoles)Enum.Parse(typeof(UserRoles), x, true));
         }
     }
 }

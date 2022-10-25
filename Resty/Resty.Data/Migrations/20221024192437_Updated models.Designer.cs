@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Resty.Data;
@@ -11,9 +12,10 @@ using Resty.Data;
 namespace Resty.Data.Migrations
 {
     [DbContext(typeof(RestyDbContext))]
-    partial class RestyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221024192437_Updated models")]
+    partial class Updatedmodels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,7 +25,7 @@ namespace Resty.Data.Migrations
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.HasSequence<int>("Blogs_Seq", "public")
-                .StartsAt(7L);
+                .StartsAt(4L);
 
             modelBuilder.HasSequence<int>("BlogUserBookmark_Seq", "public")
                 .StartsAt(4L);
@@ -33,6 +35,9 @@ namespace Resty.Data.Migrations
 
             modelBuilder.HasSequence<int>("BlogUserReview_Seq", "public")
                 .StartsAt(7L);
+
+            modelBuilder.HasSequence<int>("UserRoles_Seq", "public")
+                .StartsAt(4L);
 
             modelBuilder.HasSequence<int>("Users_Seq", "public")
                 .StartsAt(4L);
@@ -63,10 +68,6 @@ namespace Resty.Data.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("character varying(70)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
@@ -81,56 +82,26 @@ namespace Resty.Data.Migrations
                             Id = 1,
                             AuthorId = 1,
                             Content = "TEST",
-                            CreatedDateUtc = new DateTime(2022, 10, 25, 7, 16, 57, 37, DateTimeKind.Utc).AddTicks(6625),
+                            CreatedDateUtc = new DateTime(2022, 10, 24, 19, 24, 37, 82, DateTimeKind.Utc).AddTicks(6556),
                             Description = "Blog created by DenisAdmin",
-                            Title = "DenisAdmin Blog",
-                            Type = "Post"
+                            Title = "DenisAdmin Blog"
                         },
                         new
                         {
                             Id = 2,
                             AuthorId = 2,
                             Content = "TEST 2",
-                            CreatedDateUtc = new DateTime(2022, 10, 25, 6, 16, 57, 37, DateTimeKind.Utc).AddTicks(6627),
+                            CreatedDateUtc = new DateTime(2022, 10, 24, 18, 24, 37, 82, DateTimeKind.Utc).AddTicks(6557),
                             Description = "Blog created by DenisGuest",
-                            Title = "DenisGuest Blog",
-                            Type = "Post"
+                            Title = "DenisGuest Blog"
                         },
                         new
                         {
                             Id = 3,
                             AuthorId = 3,
                             Content = "TEST 3",
-                            CreatedDateUtc = new DateTime(2022, 10, 25, 5, 16, 57, 37, DateTimeKind.Utc).AddTicks(6628),
-                            Title = "DenisPrime Blog",
-                            Type = "Post"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AuthorId = 1,
-                            Content = "TEST NEWS 1",
-                            CreatedDateUtc = new DateTime(2022, 10, 25, 5, 16, 57, 37, DateTimeKind.Utc).AddTicks(6629),
-                            Title = "DenisAdmin News 1",
-                            Type = "News"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AuthorId = 1,
-                            Content = "TEST NEWS 2",
-                            CreatedDateUtc = new DateTime(2022, 10, 25, 4, 16, 57, 37, DateTimeKind.Utc).AddTicks(6630),
-                            Title = "DenisAdmin News 3",
-                            Type = "News"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AuthorId = 1,
-                            Content = "TEST NEWS 3",
-                            CreatedDateUtc = new DateTime(2022, 10, 25, 3, 16, 57, 37, DateTimeKind.Utc).AddTicks(6630),
-                            Title = "DenisAdmin News 3",
-                            Type = "News"
+                            CreatedDateUtc = new DateTime(2022, 10, 24, 17, 24, 37, 82, DateTimeKind.Utc).AddTicks(6559),
+                            Title = "DenisPrime Blog"
                         });
                 });
 
@@ -213,7 +184,7 @@ namespace Resty.Data.Migrations
                             Id = 1,
                             BlogId = 1,
                             CommentText = "Comment from DenisGuest",
-                            CreatedDateUtc = new DateTime(2022, 10, 25, 7, 16, 57, 37, DateTimeKind.Utc).AddTicks(6898),
+                            CreatedDateUtc = new DateTime(2022, 10, 24, 19, 24, 37, 82, DateTimeKind.Utc).AddTicks(6736),
                             UserId = 2
                         },
                         new
@@ -221,7 +192,7 @@ namespace Resty.Data.Migrations
                             Id = 2,
                             BlogId = 1,
                             CommentText = "Comment from DenisPrime",
-                            CreatedDateUtc = new DateTime(2022, 10, 25, 4, 16, 57, 37, DateTimeKind.Utc).AddTicks(6899),
+                            CreatedDateUtc = new DateTime(2022, 10, 24, 16, 24, 37, 82, DateTimeKind.Utc).AddTicks(6738),
                             UserId = 3
                         });
                 });
@@ -331,9 +302,8 @@ namespace Resty.Data.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("StartDateUtc")
                         .HasColumnType("timestamp with time zone");
@@ -350,6 +320,8 @@ namespace Resty.Data.Migrations
 
                     b.HasIndex("Rating");
 
+                    b.HasIndex("RoleId");
+
                     b.HasIndex("Username")
                         .IsUnique();
 
@@ -364,8 +336,8 @@ namespace Resty.Data.Migrations
                             LastName = "Kaminsky",
                             PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
                             Rating = 900,
-                            Role = "Admin",
-                            StartDateUtc = new DateTime(2022, 7, 17, 7, 16, 57, 37, DateTimeKind.Utc).AddTicks(6355),
+                            RoleId = 1,
+                            StartDateUtc = new DateTime(2022, 7, 16, 19, 24, 37, 82, DateTimeKind.Utc).AddTicks(6355),
                             Username = "DenisAdmin"
                         },
                         new
@@ -376,8 +348,8 @@ namespace Resty.Data.Migrations
                             LastName = "KaminskyGuest",
                             PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
                             Rating = 1,
-                            Role = "GuestUser",
-                            StartDateUtc = new DateTime(2022, 10, 15, 7, 16, 57, 37, DateTimeKind.Utc).AddTicks(6359),
+                            RoleId = 2,
+                            StartDateUtc = new DateTime(2022, 10, 14, 19, 24, 37, 82, DateTimeKind.Utc).AddTicks(6359),
                             Username = "DenisGuest"
                         },
                         new
@@ -388,9 +360,46 @@ namespace Resty.Data.Migrations
                             LastName = "KaminskyPrime",
                             PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
                             Rating = 3,
-                            Role = "PrimeUser",
-                            StartDateUtc = new DateTime(2022, 10, 20, 7, 16, 57, 37, DateTimeKind.Utc).AddTicks(6361),
+                            RoleId = 3,
+                            StartDateUtc = new DateTime(2022, 10, 19, 19, 24, 37, 82, DateTimeKind.Utc).AddTicks(6361),
                             Username = "DenisPrime"
+                        });
+                });
+
+            modelBuilder.Entity("Resty.Data.Models.User.UserRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValueSql("nextval('\"UserRoles_Seq\"')");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "GuestUser"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "PrimeUser"
                         });
                 });
 
@@ -462,6 +471,17 @@ namespace Resty.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Resty.Data.Models.User.User", b =>
+                {
+                    b.HasOne("Resty.Data.Models.User.UserRole", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("Resty.Data.Models.Blog.Blog", b =>
                 {
                     b.Navigation("UserBookmarks");
@@ -480,6 +500,11 @@ namespace Resty.Data.Migrations
                     b.Navigation("BlogReviews");
 
                     b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("Resty.Data.Models.User.UserRole", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,4 @@
-﻿namespace Resty.Core.Constraints.Blog
+﻿namespace Resty.Core.Interfaces.Constraints.Blog
 {
     public static class BlogUserCommentConstraints
     {

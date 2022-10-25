@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Resty.Core.Constraints.Blog;
+using Resty.Core.Interfaces.Constraints.Blog;
 
 namespace Resty.Data.ModelConfigurations.UserBlog
 {

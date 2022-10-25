@@ -13,7 +13,8 @@ namespace Resty.Data.Seeds.UserBlog
                     Id = 1,
                     UserId = 2,
                     BlogId = 1,
-                    CommentText = "Comment from DenisGuest"
+                    CommentText = "Comment from DenisGuest",
+                    CreatedDateUtc = DateTime.UtcNow
                 },
 
                 new Models.Blog.BlogUserComment
@@ -21,7 +22,8 @@ namespace Resty.Data.Seeds.UserBlog
                     Id = 2,
                     UserId = 3,
                     BlogId = 1,
-                    CommentText = "Comment from DenisPrime"
+                    CommentText = "Comment from DenisPrime",
+                    CreatedDateUtc = DateTime.UtcNow.AddHours(-3)
                 },
             };
 

@@ -11,7 +11,6 @@ namespace Resty.Data.ModelConfigurations
         {
             #region User
             modelBuilder.ConfigureUser();
-            modelBuilder.ConfigureUserRole();
             #endregion
 
             #region Blog

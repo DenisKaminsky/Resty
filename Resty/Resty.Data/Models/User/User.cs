@@ -1,4 +1,5 @@
-﻿using Resty.Data.Models.Base;
+﻿using Resty.Core.Interfaces.Enums.User;
+using Resty.Data.Models.Base;
 using Resty.Data.Models.Blog;
 
 namespace Resty.Data.Models.User
@@ -21,9 +22,7 @@ namespace Resty.Data.Models.User
 
         public DateTime? EndDateUtc { get; set; }
 
-        public int RoleId { get; set; }
-
-        public UserRole Role { get; set; }
+        public UserRoles Role { get; set; }
 
         public IEnumerable<Blog.Blog> Blogs { get; set; }
 

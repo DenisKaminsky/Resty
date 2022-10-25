@@ -6,6 +6,8 @@ namespace Resty.Data.Models.Blog
     {
         public string CommentText { get; set; }
 
+        public DateTime CreatedDateUtc { get; set; }
+
         public int UserId { get; set; }
 
         public User.User User { get; set; }

@@ -1,4 +1,5 @@
-﻿using Resty.Data.Models.Base;
+﻿using Resty.Core.Interfaces.Enums.Blog;
+using Resty.Data.Models.Base;
 
 namespace Resty.Data.Models.Blog
 {
@@ -15,6 +16,8 @@ namespace Resty.Data.Models.Blog
         public int AuthorId { get; set; }
 
         public User.User Author { get; set; }   
+
+        public BlogTypes Type { get; set; }
 
         public IEnumerable<BlogUserBookmark> UserBookmarks { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Resty.Core.Constraints.Blog;
+using Resty.Core.Interfaces.Constraints.Blog;
+using Resty.Core.Interfaces.Enums.Blog;
 
 namespace Resty.Data.ModelConfigurations.Blog
 {
@@ -23,6 +24,13 @@ namespace Resty.Data.ModelConfigurations.Blog
             modelBuilder.Entity<Models.Blog.Blog>()
                 .Property(x => x.Content)
                 .IsRequired();
+
+            modelBuilder.Entity<Models.Blog.Blog>()
+                .Property(x => x.Type)
+                .IsRequired()
+                .HasConversion(
+                    x => x.ToString(),
+                    x => (BlogTypes)Enum.Parse(typeof(BlogTypes), x, true));
 
             modelBuilder.Entity<Models.Blog.Blog>()
                 .HasOne(x => x.Author)
