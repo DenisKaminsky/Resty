@@ -4,7 +4,7 @@ namespace Resty.Data.Interfaces.Repositories.User
 {
     public interface ITestRepository
     {
-        Task<IDataUser[]> GetAllAsync();
+        Task<IDataUser[]> Test1();
 
         Task<IDataUser> GetByIdAsync(int id);
 

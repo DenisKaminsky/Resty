@@ -1,65 +1,81 @@
 ﻿using Mapster;
 using Microsoft.EntityFrameworkCore;
+using Resty.Core.Interfaces.Enums.Request;
+using Resty.Core.Interfaces.Types.Request;
 using Resty.Data.DTO.Blog;
-using Resty.Data.DTO.User;
+using Resty.Data.DTO.Request;
+using Resty.Data.Extensions;
 using Resty.Data.Interfaces.DTO.Blog;
-using Resty.Data.Interfaces.DTO.User;
-using Resty.Data.Interfaces.Repositories.User;
+using Resty.Data.Interfaces.Repositories.Blog;
 
 namespace Resty.Data.Repositories.Blog
 {
-    public class BlogQueryRepository : BaseRepository
+    public class BlogQueryRepository : BaseRepository, IBlogQueryRepository
     {
         public BlogQueryRepository(RestyDbContext context) : base(context) { }
 
-        //public Task<IDataBlog[]> GetAllAsync()
-        //{
-        //    return DbContext.Blogs
-        //        .Select(x => ToDataBlog(x))
-        //        .ToArrayAsync<IDataBlog>();
-        //}
-
-        //public Task<IDataBlog> GetByIdAsync(int id)
-        //{
-        //    return DbContext.Blogs
-        //        .Select(x => ToDataBlog(x))
-        //        .FirstOrDefaultAsync<IDataBlog>(x => x.Id == id);
-        //}
-
-
-
-
-
-
-
-        public Task<bool> ValidateUsernameExistsAsync(string username)
+        public Task<IDataBlogPreview[]> GetAllPreviewsAsync()
         {
-            return DbContext.Users
-                .AnyAsync(x => x.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+            return GetPreviewsQueryable()
+                .ToArrayAsync<IDataBlogPreview>();
         }
 
-        public Task<bool> ValidateEmailExistsAsync(string email)
+        public Task<IDataBlogPreview[]> GetPreviewsPagedAsync(IPagedAndFilteredAndSortedRequest request)
         {
-            return DbContext.Users
-                .AnyAsync(x => x.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            return GetPreviewsQueryable()
+                .ApplySorting(request, new DataSort(nameof(IDataBlogPreview.CreatedDateUtc), SortDirection.Descending))
+                .ApplyFiltering(request)
+                .ApplyPaging(request)
+                .ToArrayAsync<IDataBlogPreview>();
         }
 
-        private static IDataBlogPreview ToDataBlogPreview(Models.Blog.Blog blog)
+        public Task<IDataBlogPreview> GetPreviewByIdAsync(int id)
         {
-            return new DataBlogPreview()
-            {
-                Id = blog.Id,
-                Title = blog.Title,
-                CreatedDateUtc = blog.CreatedDateUtc,
-                Type = blog.Type,
-
-                Author = new DataAuthor
-                {
-                    Id = blog.Author.Id,
-                    Username = blog.Author.Username,
-                    Rating = blog.Author.Rating
-                }
-            };
+            return GetPreviewsQueryable()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync<IDataBlogPreview>();
         }
+
+        public Task<IDataBlog[]> GetAllAsync()
+        {
+            return GetBlogsQueryable()
+                .ToArrayAsync<IDataBlog>();
+        }
+
+        public Task<IDataBlog[]> GetPagedAsync(IPagedAndFilteredAndSortedRequest request)
+        {
+            return GetBlogsQueryable()
+                .ApplySorting(request, new DataSort(nameof(IDataBlog.CreatedDateUtc), SortDirection.Descending))
+                .ApplyFiltering(request)
+                .ApplyPaging(request)
+                .ToArrayAsync<IDataBlog>();
+        }
+
+        public Task<IDataBlog> GetByIdAsync(int id)
+        {
+            return GetBlogsQueryable()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync<IDataBlog>();
+        }
+
+        #region private methods
+        private IQueryable<DataBlog> GetBlogsQueryable()
+        {
+            return DbContext.Blogs
+                .Include(x => x.Author)
+                .Include(x => x.UserBookmarks)
+                .Include(x => x.UserReviews)
+                .ProjectToType<DataBlog>();
+        }
+
+        private IQueryable<DataBlogPreview> GetPreviewsQueryable()
+        {
+            return DbContext.Blogs
+                .Include(x => x.Author)
+                .Include(x => x.UserBookmarks)
+                .Include(x => x.UserReviews)
+                .ProjectToType<DataBlogPreview>();
+        }
+        #endregion
     }
 }

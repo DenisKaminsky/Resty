@@ -21,7 +21,16 @@ namespace Resty.Core.Interfaces.Types.Request.Default
 
         public IEnumerable<ISort> Sortings => _sorts;
 
-        public DataPagedAndFilteredAndSortedRequest(IPagedAndFilteredAndSortedRequest request)
+        public DataPagedAndFilteredAndSortedRequest(int pageNumber, int pageSize)
+        {
+            PageNumber = pageNumber;
+            PageSize = pageSize;
+
+            _filters = new List<IFilter>();
+            _sorts = new List<ISort>();
+        }
+
+        public DataPagedAndFilteredAndSortedRequest(IPagedAndFilteredAndSortedRequest request, List<IFilter> filters, List<ISort> sorts)
         {
             PageNumber = request?.PageNumber ?? DefaultPageNumber;
             PageSize = request?.PageSize ?? DefaultPageSize;

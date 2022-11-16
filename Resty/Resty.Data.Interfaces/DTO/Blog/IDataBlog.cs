@@ -3,7 +3,5 @@
     public interface IDataBlog : IDataBaseBlogInfo
     {
         string Content { get; }
-        
-        int UserGrade { get; }
     }
 }

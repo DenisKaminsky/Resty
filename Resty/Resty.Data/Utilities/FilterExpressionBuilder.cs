@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using Resty.Core.Interfaces.Enums.Request;
 using Resty.Core.Interfaces.Types.Request;
 
@@ -7,9 +8,7 @@ namespace Resty.Data.Utilities
 {
 	public static class FilterExpressionBuilder
 	{
-		private static readonly MethodInfo ContainsMethod = typeof(string).GetMethod(FilterOperator.Contains.ToString(), new[] { typeof(string) });
-		private static readonly MethodInfo StartsWithMethod = typeof(string).GetMethod(FilterOperator.StartsWith.ToString(), new[] { typeof(string) });
-		private static readonly MethodInfo EndsWithMethod = typeof(string).GetMethod(FilterOperator.EndsWith.ToString(), new[] { typeof(string) });
+        private static readonly MethodInfo LikeMethod = typeof(NpgsqlDbFunctionsExtensions).GetMethod("ILike", new[] { typeof(DbFunctions), typeof(string), typeof(string) });
 		
 		public static Expression<Func<T, bool>> GetExpression<T>(IEnumerable<IFilter> requestFilters, FilterLogic logic)
 		{
@@ -22,7 +21,6 @@ namespace Resty.Data.Utilities
             Expression resultExpression = null;
             foreach (var filter in filters)
             {
-                //var property = typeof(T).GetProperty(filter.Field, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
                 if (PropertyExpressionBuilder.ValidatePropertyAndBuildPropertyExpression(filter.Field, expressionParameter, out var propertyExpression))
                 {
                     if (resultExpression == null)
@@ -88,10 +86,26 @@ namespace Resty.Data.Utilities
                 FilterOperator.GreaterThan => Expression.GreaterThan(member, constant),
                 FilterOperator.Equal => Expression.Equal(member, constant),
                 FilterOperator.NotEqual => Expression.NotEqual(member, constant),
-                FilterOperator.Contains => Expression.Call(member, ContainsMethod, constant),
-                FilterOperator.DoesNotContain => Expression.Not(Expression.Call(member, ContainsMethod, constant)),
-                FilterOperator.EndsWith => Expression.Call(member, EndsWithMethod, constant),
-                FilterOperator.StartsWith => Expression.Call(member, StartsWithMethod, constant),
+                FilterOperator.Contains => Expression.Call(
+                    LikeMethod, 
+                    Expression.Property(null, typeof(EF), nameof(EF.Functions)), 
+                    member,
+                    Expression.Constant($"%{filterValue}%", member.Type)),
+                FilterOperator.DoesNotContain => Expression.Not(Expression.Call(
+                    LikeMethod, 
+                    Expression.Property(null, typeof(EF), nameof(EF.Functions)),
+                    member,
+                    Expression.Constant($"%{filterValue}%", member.Type))),
+                FilterOperator.EndsWith => Expression.Call(
+                    LikeMethod,
+                    Expression.Property(null, typeof(EF), nameof(EF.Functions)), 
+                    member,
+                    Expression.Constant($"%{filterValue}", member.Type)),
+                FilterOperator.StartsWith => Expression.Call(
+                    LikeMethod, 
+                    Expression.Property(null, typeof(EF), nameof(EF.Functions)), 
+                    member,
+                    Expression.Constant($"{filterValue}%", member.Type)),
                 _ => throw new NotImplementedException(
                     $"The \"{filterOperator}\" filter operator has not been implemented.")
             };

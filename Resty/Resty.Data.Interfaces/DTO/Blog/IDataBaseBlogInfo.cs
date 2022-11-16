@@ -14,9 +14,7 @@ namespace Resty.Data.Interfaces.DTO.Blog
         BlogTypes Type { get; }
 
         int Rating { get; }
-
-        bool HasUserBookmark { get; }
-
+        
         int NumberOfViews { get; }
 
         int NumberOfBookmarks { get; }

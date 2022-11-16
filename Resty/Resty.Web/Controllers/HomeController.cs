@@ -18,7 +18,7 @@ namespace Resty.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var a = await _testRepository.GetAllAsync();
+            var a = await _testRepository.Test1();
             return View();
         }
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Resty.Core.Interfaces.Enums.Blog;
-using Resty.Data.Models.Blog;
 
 namespace Resty.Data.Seeds.Blog
 {

@@ -1,9 +1,15 @@
-﻿using Resty.Data.Interfaces.DTO.Blog;
+﻿using Resty.Data.Interfaces.DTO.User;
 
 namespace Resty.Data.Interfaces.DTO.UserBlog
 {
-    public interface IDataBlogUserComment : IDataUserComment
+    public interface IDataBlogUserComment : IDataBaseModel
     {
-        IDataBaseBlogInfo Blog { get; }
+        int BlogId { get; }
+
+        string CommentText { get; }
+
+        DateTime CreatedDateUtc { get; }
+
+        IDataAuthor Author { get; }
     }
 }

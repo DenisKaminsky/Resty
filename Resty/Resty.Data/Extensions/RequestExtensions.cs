@@ -38,7 +38,11 @@ namespace Resty.Data.Extensions
             var parameterType = typeof(T);
             var parameterExpression = Expression.Parameter(parameterType, "item");
 
-			var sortings = requestSortings?.ToArray() ?? new []{ defaultSort };
+            var sortings = requestSortings?.ToList() ?? new List<ISort>();
+            if (!sortings.Any())
+            {
+                sortings.Add(defaultSort);
+            }
 			foreach (var sorting in sortings)
 			{
                 if (PropertyExpressionBuilder.ValidatePropertyAndBuildPropertyExpression(sorting.Field, parameterExpression, out var propertyExpression))

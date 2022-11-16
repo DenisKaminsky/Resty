@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Mapster;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Resty.Data.Interfaces;
+using Resty.Data.Mappings.Blog;
 using Resty.Data.Repositories;
 
 namespace Resty.Data.IOC
@@ -12,6 +14,8 @@ namespace Resty.Data.IOC
             services.AddDbContext<RestyDbContext>(options => options.UseNpgsql(connectionString));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            TypeAdapterConfig.GlobalSettings.Scan(typeof(BlogMappingConfig).Assembly);
 
             services.Scan(scan =>
             {

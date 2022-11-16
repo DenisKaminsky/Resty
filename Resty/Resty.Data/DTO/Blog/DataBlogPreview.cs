@@ -4,7 +4,7 @@ namespace Resty.Data.DTO.Blog
 {
     public class DataBlogPreview : DataBaseBlogInfo, IDataBlogPreview
     {
-        public string Description { get; set; }
+        public string Preview { get; set; }
 
         public int NumberOfComments { get; set; }
     }

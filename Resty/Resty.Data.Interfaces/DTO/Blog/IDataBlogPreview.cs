@@ -2,7 +2,7 @@
 {
     public interface IDataBlogPreview : IDataBaseBlogInfo
     {
-        string Description { get; }
+        string Preview { get; }
 
         int Rating { get; }
 

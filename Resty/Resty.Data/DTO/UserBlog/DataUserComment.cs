@@ -1,4 +1,4 @@
-﻿using Resty.Data.Interfaces.DTO.User;
+﻿using Resty.Data.Interfaces.DTO.Blog;
 using Resty.Data.Interfaces.DTO.UserBlog;
 
 namespace Resty.Data.DTO.UserBlog
@@ -9,6 +9,8 @@ namespace Resty.Data.DTO.UserBlog
 
         public DateTime CreatedDateUtc { get; set; }
 
-        public IDataAuthor Author { get; set; }
+        public int UserId { get; set; }
+
+        public IDataBaseBlogInfo Blog { get; set; }
     }
 }

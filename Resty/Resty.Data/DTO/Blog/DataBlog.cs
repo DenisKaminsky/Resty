@@ -5,7 +5,5 @@ namespace Resty.Data.DTO.Blog
     public class DataBlog : DataBaseBlogInfo, IDataBlog
     {
         public string Content { get; set; }
-        
-        public int UserGrade { get; set; }
     }
 }

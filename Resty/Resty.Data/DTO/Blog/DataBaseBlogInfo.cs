@@ -15,9 +15,7 @@ namespace Resty.Data.DTO.Blog
         public BlogTypes Type { get; set; }
 
         public int Rating { get; set; }
-
-        public bool HasUserBookmark { get; set; }
-
+        
         public int NumberOfViews { get; set; }
 
         public int NumberOfBookmarks { get; set; }
