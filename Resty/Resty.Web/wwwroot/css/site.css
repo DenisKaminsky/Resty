@@ -9,10 +9,43 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: bisque;
+}
+
+    body .body-content {
+        background-color: white;
+        border-radius: 1vw;
+        margin-bottom: 10vh;
+    }
+
+.site-logo {
+    width: 4vw;
+    height: auto;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+footer {
+    background-color: white;
+    text-align: center;
+}
+
+footer a {
+    color: black !important;
 }

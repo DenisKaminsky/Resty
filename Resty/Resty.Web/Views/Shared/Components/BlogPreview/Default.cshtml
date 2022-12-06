@@ -1,0 +1,36 @@
+﻿@using Resty.Web.Formatters.Blog
+@model Resty.Business.Interfaces.DTO.Blog.IBlogPreview
+
+<div class="post panel-white panel-shadow" id="@Model.Id">
+    <div class="post-heading">
+        <div class="pull-left image">
+            <img src="https://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+        </div>
+        <div class="pull-left meta">
+            <div class="title h5">
+                <a href="#"><b>@Model.Author.Username</b></a>
+            </div>
+            <h6 class="text-muted time">@BlogFormatter.FormatCreatedDateUtc(Model.CreatedDateUtc)</h6>
+        </div>
+        <div class="pull-right meta">
+            <div class="stat-item">
+                <i class="fa fa-eye icon"></i>@Model.NumberOfViews
+            </div>
+        </div>
+    </div> 
+    <div class="post-description">
+        <h3 class="post-title">@Model.Title</h3>
+        <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
+        <div class="stats">
+            <div class="btn post-button stat-item">
+                <i class="fa fa-star icon"></i>@Model.Rating
+            </div>
+            <div class="btn post-button stat-item">
+                <i class="fa fa-bookmark icon"></i>@Model.NumberOfBookmarks
+            </div>
+            <a class="btn post-button stat-item" href="Home/Privacy">
+                <i class="fa fa-comment icon"></i>@Model.NumberOfComments
+            </a>
+        </div>
+    </div>
+</div>

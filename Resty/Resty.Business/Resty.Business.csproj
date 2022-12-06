@@ -7,13 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Resty.Business.Interfaces\Resty.Business.Interfaces.csproj" />
-    <ProjectReference Include="..\Resty.Data.Interfaces\Resty.Data.Interfaces.csproj" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Functionality\" />
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\Resty.Business.Interfaces\Resty.Business.Interfaces.csproj" />
+    <ProjectReference Include="..\Resty.Data.Interfaces\Resty.Data.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

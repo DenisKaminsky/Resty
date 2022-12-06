@@ -1,0 +1,9 @@
+﻿@using Resty.Business.Interfaces.DTO.Blog
+@{
+    ViewData["Title"] = "Resty";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Blogs</h1>
+    @await Component.InvokeAsync("BlogPreviews")
+</div>

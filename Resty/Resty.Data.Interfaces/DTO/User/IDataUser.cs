@@ -18,6 +18,6 @@ namespace Resty.Data.Interfaces.DTO.User
 
         DateTime? EndDateUtc { get; }
 
-        public UserRoles Role { get; set; }
+        UserRoles Role { get; }
     }
 }

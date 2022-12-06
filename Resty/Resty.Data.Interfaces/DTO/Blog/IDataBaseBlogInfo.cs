@@ -18,5 +18,7 @@ namespace Resty.Data.Interfaces.DTO.Blog
         int NumberOfViews { get; }
 
         int NumberOfBookmarks { get; }
+
+        int NumberOfComments { get; }
     }
 }

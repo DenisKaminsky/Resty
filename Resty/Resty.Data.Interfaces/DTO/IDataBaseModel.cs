@@ -2,6 +2,6 @@
 {
     public interface IDataBaseModel
     {
-        int Id { get; set; }
+        int Id { get; }
     }
 }

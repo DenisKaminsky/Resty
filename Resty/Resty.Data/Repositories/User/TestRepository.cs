@@ -50,9 +50,9 @@ namespace Resty.Data.Repositories.User
 
 
         private readonly IBlogQueryRepository _blogQueryRepository;
-        private readonly IBlogCommentQueryRepository _blogCommentQueryRepository;
+        private readonly ICommentQueryRepository _blogCommentQueryRepository;
 
-        public TestRepository(RestyDbContext context, IBlogQueryRepository blogQueryRepository, IBlogCommentQueryRepository blogCommentQueryRepository) : base(context)
+        public TestRepository(RestyDbContext context, IBlogQueryRepository blogQueryRepository, ICommentQueryRepository blogCommentQueryRepository) : base(context)
         {
             _blogQueryRepository = blogQueryRepository;
             _blogCommentQueryRepository = blogCommentQueryRepository;
@@ -68,15 +68,15 @@ namespace Resty.Data.Repositories.User
                 //var res1 = await _blogQueryRepository.GetAllPreviewsAsync();
                 //var res2 = await _blogQueryRepository.GetPreviewsPagedAsync(req);
                 //var res3 = await _blogQueryRepository.GetPreviewByIdAsync(1);
-                //var res4 = await _blogQueryRepository.GetAllAsync();
-                //var res5 = await _blogQueryRepository.GetPagedAsync(req);
+                //var res4 = await _blogQueryRepository.GetAllBlogCommentsAsync();
+                //var res5 = await _blogQueryRepository.GetPagedBlogCommentsAsync(req);
                 //var res6 = await _blogQueryRepository.GetByIdAsync(1);
 
                 var req2 = new DataPagedAndFilteredAndSortedRequest(1, 5);
                 req2.AddFilter(new Filter()
                     { Field = nameof(DataBlogUserComment.CommentText), Operator = FilterOperator.Contains, Value = "Denis" });
-                var res21 = await _blogCommentQueryRepository.GetAllAsync(1);
-                var res22 = await _blogCommentQueryRepository.GetPagedAsync(req2, 1);
+                var res21 = await _blogCommentQueryRepository.GetAllBlogCommentsAsync(1);
+                var res22 = await _blogCommentQueryRepository.GetPagedBlogCommentsAsync(req2, 1);
 
 
             }

@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Resty.Business.Interfaces.DTO.Blog.IBlogPreview>
+
+@foreach (var blog in Model)
+{
+    @await Html.PartialAsync("Components/BlogPreview/Default", blog)
+}

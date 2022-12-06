@@ -65,6 +65,7 @@ namespace Resty.Data.Repositories.Blog
                 .Include(x => x.Author)
                 .Include(x => x.UserBookmarks)
                 .Include(x => x.UserReviews)
+                .Include(x => x.UserComments)
                 .ProjectToType<DataBlog>();
         }
 
@@ -74,6 +75,7 @@ namespace Resty.Data.Repositories.Blog
                 .Include(x => x.Author)
                 .Include(x => x.UserBookmarks)
                 .Include(x => x.UserReviews)
+                .Include(x => x.UserComments)
                 .ProjectToType<DataBlogPreview>();
         }
         #endregion

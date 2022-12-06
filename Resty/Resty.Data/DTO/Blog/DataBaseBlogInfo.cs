@@ -19,5 +19,7 @@ namespace Resty.Data.DTO.Blog
         public int NumberOfViews { get; set; }
 
         public int NumberOfBookmarks { get; set; }
+
+        public int NumberOfComments { get; set; }
     }
 }
